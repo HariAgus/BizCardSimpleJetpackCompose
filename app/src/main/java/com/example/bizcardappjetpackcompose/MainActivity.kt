@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bizcardappjetpackcompose.ui.theme.BizCardAppJetpackComposeTheme
@@ -25,7 +27,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BizCardAppJetpackComposeTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     CreateBizCard()
                 }
@@ -57,8 +58,33 @@ fun CreateBizCard() {
             ) {
                 CreateImageProfile()
                 Divider()
+                CreateInfo()
             }
         }
+    }
+}
+
+@Composable
+private fun CreateInfo() {
+    Column(
+        modifier = Modifier.padding(5.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Hari Agus W",
+            style = MaterialTheme.typography.h5,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colors.primary
+        )
+        Text(
+            text = "Mobile Developer",
+            modifier = Modifier.padding(3.dp)
+        )
+        Text(
+            text = "haryagus97@gmail.com",
+            style = MaterialTheme.typography.subtitle1
+        )
     }
 }
 
@@ -71,12 +97,9 @@ private fun CreateImageProfile(modifier: Modifier = Modifier) {
         shape = CircleShape,
         border = BorderStroke(0.5.dp, Color.LightGray),
         elevation = 4.dp,
-        color = MaterialTheme.colors.onSurface.copy(
-            alpha = 0.1F
-        )
     ) {
         Image(
-            painter = painterResource(id = R.drawable.profile_image),
+            painter = painterResource(id = R.drawable.profile_image_2),gi
             contentDescription = "profile image",
             modifier = Modifier.size(135.dp)
         )
