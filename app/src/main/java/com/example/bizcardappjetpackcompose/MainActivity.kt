@@ -1,24 +1,25 @@
 package com.example.bizcardappjetpackcompose
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bizcardappjetpackcompose.ui.theme.BizCardAppJetpackComposeTheme
@@ -38,6 +39,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CreateBizCard() {
+    val buttonClickState = remember {
+        mutableStateOf(false)
+    }
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -63,13 +67,21 @@ fun CreateBizCard() {
                 Button(
                     modifier = Modifier.padding(top = 16.dp, bottom = 16.dp),
                     onClick = {
-                        Log.d("Clicked", "CreateBizCard: Clicked!!")
+                        buttonClickState.value = !buttonClickState.value
+
                     })
                 {
                     Text(
                         text = "Portfolio",
                         style = MaterialTheme.typography.button
                     )
+                }
+                if (buttonClickState.value) {
+                    Content()
+                } else {
+                    Box() {
+
+                    }
                 }
             }
         }
@@ -100,7 +112,11 @@ fun Content() {
 
 @Composable
 fun Portfolio(data: List<String>) {
-    Text(text = "Projects go here!")
+    LazyColumn {
+        items(data) { item ->
+            Text(item)
+        }
+    }
 }
 
 @Composable
@@ -145,7 +161,7 @@ private fun CreateImageProfile(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     CreateBizCard()
