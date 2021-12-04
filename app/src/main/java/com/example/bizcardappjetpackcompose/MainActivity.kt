@@ -9,11 +9,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.SnackbarDefaults
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
@@ -52,24 +50,36 @@ fun CreateBizCard() {
             backgroundColor = Color.White,
             elevation = 4.dp
         ) {
-            Surface(
-                modifier = Modifier
-                    .size(150.dp)
-                    .padding(5.dp),
-                shape = CircleShape,
-                border = BorderStroke(0.5.dp, Color.LightGray),
-                elevation = 4.dp,
-                color = MaterialTheme.colors.onSurface.copy(
-                    alpha = 0.5F
-                )
+            Column(
+                modifier = Modifier.height(300.dp),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.profile_image),
-                    contentDescription = "profile image",
-                    modifier = Modifier.size(135.dp)
-                )
+                CreateImageProfile()
+                Divider()
             }
         }
+    }
+}
+
+@Composable
+private fun CreateImageProfile(modifier: Modifier = Modifier) {
+    Surface(
+        modifier = Modifier
+            .size(150.dp)
+            .padding(5.dp),
+        shape = CircleShape,
+        border = BorderStroke(0.5.dp, Color.LightGray),
+        elevation = 4.dp,
+        color = MaterialTheme.colors.onSurface.copy(
+            alpha = 0.1F
+        )
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.profile_image),
+            contentDescription = "profile image",
+            modifier = Modifier.size(135.dp)
+        )
     }
 }
 
